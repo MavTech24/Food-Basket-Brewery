@@ -1,0 +1,1986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Basket Brewery - Our Brands</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ceb813;
+            --secondary: #2c5f2d;
+            --dark: #1a1a1a;
+            --light: #f8f8f8;
+            --accent: #8b4513;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--light);
+            background-color: var(--dark);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navBar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: rgba(26, 26, 26, 0.9);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(206, 184, 19, 0.2);
+            transition: var(--transition);
+        }
+
+        .navBar.scrolled {
+            padding: 0.7rem 5%;
+            background: rgba(26, 26, 26, 0.95);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            height: 50px;
+            transition: var(--transition);
+        }
+
+        .navBar.scrolled .logo img {
+            height: 40px;
+        }
+
+        .logo h3 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .navLinks nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .navLinks nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .navLinks nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        .navLinks nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .navLinks nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            height: 3px;
+            width: 100%;
+            background-color: var(--primary);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 1s ease-in-out;
+            height: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 100%);
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--light);
+            background: rgba(26, 26, 26, 0.7);
+            padding: 2.5rem;
+            border-radius: 15px;
+            max-width: 90%;
+            width: auto;
+            box-sizing: border-box;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(206, 184, 19, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .makeItBold {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: clamp(1rem, 2.5vw, 1.4rem);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            font-family: 'Lora', serif;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Navigation arrows */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: var(--light);
+            background: rgba(206, 184, 19, 0.8);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .nav-arrow:hover {
+            background: var(--primary);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        /* Dots */
+        .dots {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+        }
+
+        .dots span {
+            width: 14px;
+            height: 14px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dots .active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
+        /* Products Section */
+        .products-section {
+            padding: 100px 5%;
+            background: linear-gradient(to bottom, #252525 0%, var(--dark) 100%);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .section-title p {
+            font-size: 1.2rem;
+            color: var(--light);
+            max-width: 700px;
+            margin: 0 auto;
+            font-family: 'Lora', serif;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+        }
+
+        /* Filter Buttons */
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            padding: 0.7rem 1.5rem;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(206, 184, 19, 0.1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            position: relative;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            z-index: 2;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+
+        .product-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.1);
+        }
+
+        .product-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .product-description {
+            color: #ccc;
+            margin-bottom: 20px;
+            flex-grow: 1;
+            font-family: 'Lora', serif;
+        }
+
+        .product-details {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .detail-item {
+            text-align: center;
+        }
+
+        .detail-value {
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .detail-label {
+            font-size: 0.8rem;
+            color: #999;
+            text-transform: uppercase;
+        }
+
+        .product-cta {
+            text-align: center;
+            margin-top: auto;
+        }
+
+        .btn-outline {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        /* Seasonal Specials */
+        .seasonal-section {
+            padding: 80px 5%;
+            background: linear-gradient(to right, var(--secondary) 0%, #3a7a3c 100%);
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .seasonal-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1;
+        }
+
+        .seasonal-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .seasonal-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .seasonal-content p {
+            font-size: 1.2rem;
+            color: var(--light);
+            margin-bottom: 30px;
+        }
+
+        /* Distribution Section */
+        .distribution-section {
+            padding: 80px 5%;
+            background: var(--dark);
+        }
+
+        .distribution-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .distribution-map {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(206, 184, 19, 0.1);
+        }
+
+        .map-placeholder {
+            height: 300px;
+            background: #2a2a2a;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-style: italic;
+        }
+
+        .distribution-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .distribution-info h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .distribution-info p {
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+
+        .store-list {
+            list-style: none;
+        }
+
+        .store-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+        }
+
+        .store-list li:before {
+            content: '📍';
+            margin-right: 10px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1001;
+            overflow-y: auto;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: var(--dark);
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 800px;
+            width: 90%;
+            position: relative;
+            border: 2px solid var(--primary);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-modal:hover {
+            color: var(--light);
+        }
+
+        .modal-header {
+            margin-bottom: 30px;
+        }
+
+        .modal-header h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .modal-body {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .modal-image {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .modal-image img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .modal-details {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .modal-details h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .ingredients-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .ingredients-list li {
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .ingredients-list li:before {
+            content: '•';
+            color: var(--primary);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .hero-content {
+                padding: 2rem;
+                max-width: 85%;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .navLinks nav ul {
+                gap: 1.5rem;
+            }
+            
+            .logo h3 {
+                font-size: 1.2rem;
+            }
+            
+            .hero-content {
+                padding: 1.8rem;
+                max-width: 80%;
+            }
+            
+            .hero-content h1 {
+                margin-bottom: 1.2rem;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .navLinks {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                background: rgba(26, 26, 26, 0.95);
+                width: 250px;
+                height: calc(100vh - 70px);
+                transition: var(--transition);
+                backdrop-filter: blur(10px);
+                border-left: 1px solid rgba(206, 184, 19, 0.2);
+            }
+            
+            .navLinks.active {
+                right: 0;
+            }
+            
+            .navLinks nav ul {
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+            }
+            
+            .hero-content {
+                padding: 1.5rem;
+                max-width: 90%;
+                top: 50%;
+            }
+            
+            .nav-arrow {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
+            
+            .hero {
+                height: 80vh;
+            }
+            
+            .cta-button {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .products-section {
+                padding: 80px 5%;
+            }
+
+            .modal-body {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logo h3 {
+                font-size: 1rem;
+            }
+            
+            .logo img {
+                height: 40px;
+            }
+            
+            .navBar.scrolled .logo img {
+                height: 35px;
+            }
+            
+            .hero-content {
+                padding: 1.2rem;
+                max-width: 95%;
+                top: 50%;
+            }
+            
+            .hero-content h1 {
+                font-size: 1.6rem;
+                margin-bottom: 1rem;
+            }
+            
+            .hero-content p {
+                font-size: 0.95rem;
+                margin-bottom: 1rem;
+            }
+            
+            .cta-button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.85rem;
+                margin-top: 0.5rem;
+            }
+            
+            .nav-arrow {
+                width: 35px;
+                height: 35px;
+                font-size: 1.2rem;
+            }
+            
+            .prev {
+                left: 10px;
+            }
+            
+            .next {
+                right: 10px;
+            }
+            
+            .dots {
+                bottom: 20px;
+            }
+            
+            .dots span {
+                width: 12px;
+                height: 12px;
+            }
+            
+            .hero {
+                height: 70vh;
+            }
+
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-buttons {
+                gap: 10px;
+            }
+
+            .filter-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .hero-content {
+                padding: 1rem;
+                max-width: 98%;
+                top: 50%;
+            }
+            
+            .hero-content h1 {
+                font-size: 1.4rem;
+                margin-bottom: 0.8rem;
+            }
+            
+            .hero-content p {
+                font-size: 0.9rem;
+                margin-bottom: 0.8rem;
+            }
+            
+            .cta-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+            
+            .nav-arrow {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+            
+            .hero {
+                height: 65vh;
+            }
+        }
+
+        @media (max-height: 600px) {
+            .hero-content {
+                top: 50%;
+                padding: 1.2rem;
+            }
+            
+            .hero-content h1 {
+                margin-bottom: 0.8rem;
+                font-size: 1.5rem;
+            }
+            
+            .hero-content p {
+                margin-bottom: 0.8rem;
+                font-size: 0.9rem;
+            }
+            
+            .cta-button {
+                padding: 0.5rem 1rem;
+                margin-top: 0.5rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero-content {
+                top: 50%;
+                padding: 1rem;
+                transform: translate(-50%, -50%) scale(0.9);
+            }
+            
+            .hero-content h1 {
+                margin-bottom: 0.5rem;
+                font-size: 1.4rem;
+            }
+            
+            .hero-content p {
+                margin-bottom: 0.5rem;
+                font-size: 0.85rem;
+            }
+            
+            .cta-button {
+                padding: 0.4rem 0.8rem;
+                margin-top: 0.3rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-content {
+            animation: fadeIn 1s ease-out;
+        }
+
+        .product-card {
+            animation: fadeIn 1s ease-out;
+        }
+
+
+                /* footer */
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: rgba(26, 26, 26, 0.95);
+            border-radius: 20px;
+            padding: 60px 40px 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(206, 184, 19, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 60px;
+        }
+
+        .footer-about p {
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 20px;
+            max-width: 300px;
+        }
+
+        .footer-heading {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a i {
+            margin-right: 10px;
+            color: var(--primary);
+            font-size: 0.8rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .footer-contact {
+            list-style: none;
+        }
+
+        .footer-contact li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .footer-contact i {
+            color: var(--primary);
+            margin-right: 15px;
+            font-size: 1.1rem;
+            margin-top: 3px;
+        }
+
+        .footer-contact span {
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        .footer-newsletter p {
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .newsletter-btn {
+            background: var(--primary);
+            color: var(--dark);
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .newsletter-btn:hover {
+            background: var(--secondary);
+            color: var(--light);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: #ccc;
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-5px);
+        }
+
+        /* Developer Section */
+        .developer-section {
+            background: rgba(206, 184, 19, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 40px;
+            border-left: 4px solid var(--primary);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .developer-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--dark);
+            font-weight: bold;
+        }
+
+        .developer-info {
+            flex: 1;
+        }
+
+        .developer-info h3 {
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .developer-info p {
+            color: #ccc;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .developer-tag {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .developer-contact {
+            display: flex;
+            gap: 15px;
+        }
+
+        .dev-contact-btn {
+            padding: 8px 20px;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dev-contact-btn:hover {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        /* Footer Bottom */
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .copyright {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-bottom-links a {
+            color: #999;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--primary);
+        }
+
+        .back-to-top {
+            background: var(--primary);
+            color: var(--dark);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(206, 184, 19, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .footer {
+                padding: 40px 20px 20px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .developer-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .developer-contact {
+                justify-content: center;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input {
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-btn {
+                border-radius: 5px;
+                padding: 12px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer-content > div {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .developer-section {
+            animation: fadeIn 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="navBar">
+        <div class="logo">
+            <img src="Component/images/ChatGPT Image Sep 16, 2025, 04_30_43 PM.png" alt="Food Basket Brewery Logo">
+            <h3>FOOD BASKET BREWERY</h3>
+        </div>
+
+        <div class="navLinks">
+            <nav>
+                <ul>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="About-us.html">ABOUT US</a></li>
+                    <li><a href="product.html">OUR PRODUCTS</a></li>
+                    <li><a href="brewery.html">BREWERY TOUR</a></li>
+                    <li><a href="sustainability.html">SUSTAINABILITY</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Hero Section with Slider -->
+    <section class="hero">
+        <div class="slides">
+            <!-- slide 1 -->
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1505075106905-fb052892c116?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');">
+                <div class="hero-content">
+                    <h1>Welcome to Food Basket Brewery <span class="makeItBold">(FBB)</span></h1>
+                    <p>Benue's pioneering brewery, committed to crafting world-class beverages with locally sourced ingredients.</p>
+                    <a href="#" class="cta-button">Explore Our Brews</a>
+                </div>
+ 
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products-section" id="products">
+        <div class="section-title">
+            <h2>Our Signature Brews</h2>
+            <p>Discover our range of expertly crafted beverages made with locally sourced ingredients</p>
+        </div>
+        
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All Products</button>
+            <button class="filter-btn" data-filter="beer">Beers</button>
+            <button class="filter-btn" data-filter="malt">Malts</button>
+            <button class="filter-btn" data-filter="special">Specialty</button>
+            <button class="filter-btn" data-filter="seasonal">Seasonal</button>
+        </div>
+        
+        <div class="products-grid">
+            <div class="product-card" data-category="beer">
+                <div class="product-badge">Best Seller</div>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1559525839-8f275eef62e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Benue Gold Lager">
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Benue Gold Lager</h3>
+                    <p class="product-description">A crisp, refreshing lager with a golden hue and subtle malt character. Brewed with locally sourced barley and our unique yeast strain.</p>
+                    
+                    <div class="product-details">
+                        <div class="detail-item">
+                            <div class="detail-value">4.8%</div>
+                            <div class="detail-label">ABV</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-value">22</div>
+                            <div class="detail-label">IBU</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-value">12oz</div>
+                            <div class="detail-label">Serving</div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-cta">
+                        <a href="#" class="btn-outline view-details" data-product="benue-gold">View Details</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card" data-category="malt">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1612528448345-737e5fdef2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Makurdi Malt">
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Makurdi Malt</h3>
+                    <p class="product-description">A non-alcoholic malt beverage with rich, roasted flavors and a hint of sweetness. Perfect for any occasion.</p>
+                    
+                    <div class="product-details">
+                        <div class="detail-item">
+                            <div class="detail-value">0.0%</div>
+                            <div class="detail-label">ABV</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-value">8</div>
+                            <div class="detail-label">IBU</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-value">16oz</div>
+                            <div class="detail-label">Serving</div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-cta">
+                        <a href="#" class="btn-outline view-details" data-product="makurdi-malt">View Details</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card" data-category="beer">
+                <div class="product-badge">New</div>
+                <div class="product-image">
+                    <img src="Component/images/images (5).jpeg" alt="ZEVA">
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">ZEVA</h3>
+                    <p class="product-description">Smooth, refreshing, and proudly brewed in Benue. ZEVA is the taste of quality and authenticity.</p>
+                    
+                    <div class="product-details">
+                        <div class="detail-item">
+                            <div class="detail-value">6.2%</div>
+                            <div class="detail-label">ABV</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-value">65</div>
+                            <div class="detail-label">IBU</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-value">16oz</div>
+                            <div class="detail-label">Serving</div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-cta">
+                        <a href="#" class="btn-outline view-details" data-product="river-ipa">View Details</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card" data-category="special">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1549746423c5f3d150048a4990cf5f24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Yam Porter">
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Yam Porter</h3>
+                    <p class="product-description">A unique porter brewed with locally grown yams, offering a rich, smooth flavor with notes of chocolate and coffee.</p>
+                    
+                    <div class="product-details">
+                        <div class="detail-item">
+                            <div class="detail-value">5.5%</div>
+                            <div class="detail-label">ABV</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-value">30</div>
+                            <div class="detail-label">IBU</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-value">16oz</div>
+                            <div class="detail-label">Serving</div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-cta">
+                        <a href="#" class="btn-outline view-details" data-product="yam-porter">View Details</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card" data-category="seasonal">
+                <div class="product-badge">Limited</div>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1597821595360-4e3f5d7baebb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Harmattan Honey Ale">
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Harmattan Honey Ale</h3>
+                    <p class="product-description">A seasonal ale brewed with local honey, offering a warm, spicy character perfect for the harmattan season.</p>
+                    
+                    <div class="product-details">
+                        <div class="detail-item">
+                            <div class="detail-value">5.0%</div>
+                            <div class="detail-label">ABV</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-value">20</div>
+                            <div class="detail-label">IBU</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-value">12oz</div>
+                            <div class="detail-label">Serving</div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-cta">
+                        <a href="#" class="btn-outline view-details" data-product="honey-ale">View Details</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-card" data-category="malt">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Sorghum Sparkle">
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">Sorghum Sparkle</h3>
+                    <p class="product-description">A refreshing non-alcoholic beverage made from sorghum with a light, effervescent quality and natural sweetness.</p>
+                    
+                    <div class="product-details">
+                        <div class="detail-item">
+                            <div class="detail-value">0.0%</div>
+                            <div class="detail-label">ABV</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-value">5</div>
+                            <div class="detail-label">IBU</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-value">12oz</div>
+                            <div class="detail-label">Serving</div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-cta">
+                        <a href="#" class="btn-outline view-details" data-product="sorghum-sparkle">View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seasonal Specials Section -->
+    <section class="seasonal-section">
+        <div class="seasonal-content">
+            <h2>Seasonal Specials</h2>
+            <p>Discover our limited edition brews crafted to celebrate the seasons and local harvests. Available for a limited time only!</p>
+            <a href="#" class="cta-button">Explore Seasonal Brews</a>
+        </div>
+    </section>
+
+    <!-- Distribution Section -->
+    <section class="distribution-section">
+        <div class="section-title">
+            <h2>Find Our Brews</h2>
+            <p>Discover where you can find Food Basket Brewery products across Benue and beyond</p>
+        </div>
+        
+        <div class="distribution-content">
+            <div class="distribution-map">
+                <div class="map-placeholder">
+                    <p>Interactive map showing distribution areas</p>
+                </div>
+            </div>
+            
+            <div class="distribution-info">
+                <h3>Where to Buy</h3>
+                <p>Our products are available at select locations throughout Benue State and neighboring regions. Look for our distinctive logo at these fine establishments:</p>
+                
+                <ul class="store-list">
+                    <li>Makurdi Central Market</li>
+                    <li>Gboko Premium Stores</li>
+                    <li>Otukpo Beverage Haven</li>
+                    <li>Katsina-Ala Plaza</li>
+                    <li> select supermarkets in Abuja</li>
+                </ul>
+                
+                <p>Can't find our products in your area? <a href="#" style="color: var(--primary);">Contact us</a> to inquire about distribution or visit our brewery store.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2 id="modal-product-name">Product Name</h2>
+                <p id="modal-product-tagline">Product tagline goes here</p>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image">
+                    <img id="modal-product-image" src="" alt="Product Image">
+                </div>
+                <div class="modal-details">
+                    <h3>Details</h3>
+                    <p id="modal-product-description">Product description goes here.</p>
+                    
+                    <div class="product-details">
+                        <div class="detail-item">
+                            <div class="detail-value" id="modal-abv">0.0%</div>
+                            <div class="detail-label">ABV</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-value" id="modal-ibu">0</div>
+                            <div class="detail-label">IBU</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-value" id="modal-serving">0oz</div>
+                            <div class="detail-label">Serving</div>
+                        </div>
+                    </div>
+                    
+                    <h3>Ingredients</h3>
+                    <ul class="ingredients-list" id="modal-ingredients">
+                        <li>Ingredient 1</li>
+                        <li>Ingredient 2</li>
+                        <li>Ingredient 3</li>
+                    </ul>
+                    
+                    <h3>Tasting Notes</h3>
+                    <p id="modal-tasting-notes">Tasting notes go here.</p>
+                    
+                    <div class="product-cta">
+                        <a href="#" class="cta-button">Where to Buy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- footer -->
+
+      <div class="container">
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="Component/Images/ChatGPT Image Sep 16, 2025, 04_30_43 PM.png" alt="Food Basket Brewery Logo">
+                    </div>
+                    <p>Benue's pioneering brewery, crafting world-class beverages with locally sourced ingredients since 2018.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="/Component/ABOUT/About-us.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="./Component/PRODUCTS/product.html"><i class="fas fa-chevron-right"></i> Our Products</a></li>
+                        <li><a href="../Component/BRE.TOUR/brewery.html"><i class="fas fa-chevron-right"></i> Brewery Tour</a></li>
+                        <li><a href="../Component/SUSTAINABILITY/sustainability.html"><i class="fas fa-chevron-right"></i> Sustainability</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3 class="footer-heading">Contact Info</h3>
+                    <ul>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Gboko Road<br>Makurdi, Benue State, Nigeria</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+234 123 456 7890<br>+234 098 765 4321</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@foodbasketbrewery.com<br>orders@foodbasketbrewery.com</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h3 class="footer-heading">Newsletter</h3>
+                    <p>Subscribe to our newsletter for updates on new products, events, and exclusive offers.</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                        <button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Developer Section -->
+            <div class="developer-section">
+                <div class="developer-avatar">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="developer-info">
+                    <h3>Crafted with <i class="fas fa-heart" style="color: #e74c3c;"></i> by MavelCodeSolutions</h3>
+                    <p>Web Developer & Designer specializing in creating unique digital experiences for businesses.</p>
+                    <span class="developer-tag"><i class="fas fa-tag"></i> Full Stack Developer</span>
+                </div>
+                <div class="developer-contact">
+                    <a href="https://mavcode.netlify.app/" class="dev-contact-btn"><i class="fas fa-envelope" ></i> Portfolio</a>
+                    <a href="https://github.com/MavTech24" class="dev-contact-btn"><i class="fab fa-github"></i> Github</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2025 Food Basket Brewery. All Rights Reserved. | Designed & Developed by <b><a href="#">MavelCodeSolutions</a></b></p>
+                </div>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Sitemap</a>
+                </div>
+                <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+            </div>
+        </footer>
+
+
+    <script>
+        const menuToggle = document.querySelector(".menu-toggle");
+        const navLinks = document.querySelector(".navLinks");
+        const navBar = document.querySelector(".navBar");
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const productCards = document.querySelectorAll(".product-card");
+        const viewDetailsButtons = document.querySelectorAll(".view-details");
+        const modal = document.getElementById("productModal");
+        const closeModal = document.querySelector(".close-modal");
+
+
+        // Filter products
+        filterButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove("active"));
+                
+                // Add active class to clicked button
+                button.classList.add("active");
+                
+                const filterValue = button.getAttribute("data-filter");
+                
+                productCards.forEach(card => {
+                    if (filterValue === "all" || card.getAttribute("data-category") === filterValue) {
+                        card.style.display = "flex";
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+            });
+        });
+
+        // Product details modal
+        const productData = {
+            "benue-gold": {
+                name: "Benue Gold Lager",
+                tagline: "Crisp, Refreshing, Golden",
+                image: "https://images.unsplash.com/photo-1559525839-8f275eef62e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
+                description: "A crisp, refreshing lager with a golden hue and subtle malt character. Brewed with locally sourced barley and our unique yeast strain. This is our flagship beer that represents the spirit of Benue in every sip.",
+                abv: "4.8%",
+                ibu: "22",
+                serving: "12oz Bottle",
+                ingredients: ["Local barley", "Benue hops", "Special yeast strain", "Pure water", "Rice hulls"],
+                tastingNotes: "Light golden color with a clean, crisp taste. Subtle malt sweetness balanced with a gentle hop bitterness. Clean finish with slight notes of bread and honey."
+            },
+            "makurdi-malt": {
+                name: "Makurdi Malt",
+                tagline: "Rich, Roasted, Refreshing",
+                image: "https://images.unsplash.com/photo-1612528448345-737e5fdef2f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
+                description: "A non-alcoholic malt beverage with rich, roasted flavors and a hint of sweetness. Perfect for any occasion. Made from the finest locally sourced grains and slow-roasted to perfection.",
+                abv: "0.0%",
+                ibu: "8",
+                serving: "16oz Can",
+                ingredients: ["Malted barley", "Roasted grains", "Natural sweeteners", "Carbonated water", "Natural flavors"],
+                tastingNotes: "Deep amber color with rich aromas of roasted malt and caramel. Sweet initial taste followed by a smooth, malty character with notes of coffee and chocolate. Refreshing finish."
+            },
+            "river-ipa": {
+                name: "River Benue IPA",
+                tagline: "Bold, Hoppy, Citrusy",
+                image: "https://images.unsplash.com/photo-1618885472185-d3d72e2ac256?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
+                description: "A bold India Pale Ale with citrus and pine notes, featuring a distinctive bitterness balanced by malt sweetness. Inspired by the mighty River Benue that flows through our region.",
+                abv: "6.2%",
+                ibu: "65",
+                serving: "16oz Can",
+                ingredients: ["Pale malt", "Cara malt", "Citrus hops", "Pine hops", "Special IPA yeast"],
+                tastingNotes: "Copper color with intense aromas of citrus and pine. Prominent hop bitterness balanced by malt sweetness. Notes of grapefruit, orange peel, and pine with a dry, bitter finish."
+            },
+            "yam-porter": {
+                name: "Yam Porter",
+                tagline: "Rich, Smooth, Unique",
+                image: "https://images.unsplash.com/photo-1549746423c5f3d150048a4990cf5f24?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
+                description: "A unique porter brewed with locally grown yams, offering a rich, smooth flavor with notes of chocolate and coffee. This innovative brew celebrates Benue's status as the Yam Belt of Nigeria.",
+                abv: "5.5%",
+                ibu: "30",
+                serving: "16oz Bottle",
+                ingredients: ["Local yams", "Chocolate malt", "Black malt", "Traditional hops", "Special yeast"],
+                tastingNotes: "Dark brown with ruby highlights. Aromas of dark chocolate, coffee, and roasted yams. Smooth, creamy texture with flavors of dark chocolate, caramelized yam, and coffee with a clean finish."
+            },
+            "honey-ale": {
+                name: "Harmattan Honey Ale",
+                tagline: "Warm, Spicy, Seasonal",
+                image: "https://images.unsplash.com/photo-1597821595360-4e3f5d7baebb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
+                description: "A seasonal ale brewed with local honey, offering a warm, spicy character perfect for the harmattan season. This limited edition brew is available only during the dry season months.",
+                abv: "5.0%",
+                ibu: "20",
+                serving: "12oz Bottle",
+                ingredients: ["Local honey", "Pale malt", "Spices", "Traditional hops", "Special ale yeast"],
+                tastingNotes: "Golden amber color with aromas of honey, ginger, and light spices. Sweet honey character balanced by subtle spice notes. Smooth mouthfeel with a warm, comforting finish."
+            },
+            "sorghum-sparkle": {
+                name: "Sorghum Sparkle",
+                tagline: "Light, Effervescent, Refreshing",
+                image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
+                description: "A refreshing non-alcoholic beverage made from sorghum with a light, effervescent quality and natural sweetness. This traditional drink has been reimagined for modern palates.",
+                abv: "0.0%",
+                ibu: "5",
+                serving: "12oz Can",
+                ingredients: ["Local sorghum", "Natural sweeteners", "Carbonated water", "Lemon essence", "Natural flavors"],
+                tastingNotes: "Light golden color with a lively effervescence. Subtle sweetness with notes of lemon and grain. Clean, refreshing finish that quenches thirst perfectly."
+            }
+        };
+
+        viewDetailsButtons.forEach(button => {
+            button.addEventListener("click", (e) => {
+                e.preventDefault();
+                const productId = button.getAttribute("data-product");
+                const product = productData[productId];
+                
+                if (product) {
+                    document.getElementById("modal-product-name").textContent = product.name;
+                    document.getElementById("modal-product-tagline").textContent = product.tagline;
+                    document.getElementById("modal-product-image").src = product.image;
+                    document.getElementById("modal-product-description").textContent = product.description;
+                    document.getElementById("modal-abv").textContent = product.abv;
+                    document.getElementById("modal-ibu").textContent = product.ibu;
+                    document.getElementById("modal-serving").textContent = product.serving;
+                    document.getElementById("modal-tasting-notes").textContent = product.tastingNotes;
+                    
+                    // Update ingredients list
+                    const ingredientsList = document.getElementById("modal-ingredients");
+                    ingredientsList.innerHTML = "";
+                    product.ingredients.forEach(ingredient => {
+                        const li = document.createElement("li");
+                        li.textContent = ingredient;
+                        ingredientsList.appendChild(li);
+                    });
+                    
+                    // Show modal
+                    modal.style.display = "block";
+                    document.body.style.overflow = "hidden";
+                }
+            });
+        });
+
+        // Close modal
+        closeModal.addEventListener("click", () => {
+            modal.style.display = "none";
+            document.body.style.overflow = "auto";
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.style.display = "none";
+                document.body.style.overflow = "auto";
+            }
+        });
+
+        // Events for slider navigation
+        nextBtn.addEventListener("click", () => {
+            nextSlide();
+            stopAutoSlide();
+            startAutoSlide();
+        });
+
+        prevBtn.addEventListener("click", () => {
+            prevSlide();
+            stopAutoSlide();
+            startAutoSlide();
+        });
+
+        // Events for dots
+        dots.forEach((dot, i) => {
+            dot.addEventListener("click", () => {
+                index = i;
+                showSlide(index);
+                stopAutoSlide();
+                startAutoSlide();
+            });
+        });
+
+        // Mobile menu toggle
+        menuToggle.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+            menuToggle.classList.toggle("active");
+        });
+
+        // Navbar scroll effect
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) {
+                navBar.classList.add("scrolled");
+            } else {
+                navBar.classList.remove("scrolled");
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll(".navLinks nav ul li a").forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("active");
+                menuToggle.classList.remove("active");
+            });
+        });
+
+        // Initialize
+        showSlide(index);
+        startAutoSlide();
+
+        // Adjust hero content on resize
+        window.addEventListener('resize', function() {
+            // Force re-render to adjust to new screen size
+            const heroContent = document.querySelector('.hero-content');
+            heroContent.style.display = 'none';
+            setTimeout(() => {
+                heroContent.style.display = 'block';
+            }, 100);
+        });
+
+
+        //FOOTER
+
+                //footer
+
+              // Back to top button
+        const backToTopBtn = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.opacity = '1';
+                backToTopBtn.style.visibility = 'visible';
+            } else {
+                backToTopBtn.style.opacity = '0';
+                backToTopBtn.style.visibility = 'hidden';
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Newsletter form submission
+        const newsletterForm = document.querySelector('.newsletter-form');
+        
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const emailInput = newsletterForm.querySelector('input');
+            
+            if (emailInput.value) {
+                alert('Thank you for subscribing to our newsletter!');
+                emailInput.value = '';
+            }
+        });
+
+        // Animation on scroll
+        const footerSections = document.querySelectorAll('.footer-content > div');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 0.8s ease-out forwards';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        footerSections.forEach(section => {
+            section.style.opacity = '0';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

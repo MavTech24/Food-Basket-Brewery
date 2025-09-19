@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs - Food Basket Brewery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ceb813;
+            --secondary: #2c5f2d;
+            --dark: #1a1a1a;
+            --light: #f8f8f8;
+            --accent: #8b4513;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navBar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: rgba(26, 26, 26, 0.9);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(206, 184, 19, 0.2);
+            transition: var(--transition);
+        }
+
+        .navBar.scrolled {
+            padding: 0.7rem 5%;
+            background: rgba(26, 26, 26, 0.95);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            height: 50px;
+            transition: var(--transition);
+        }
+
+        .navBar.scrolled .logo img {
+            height: 40px;
+        }
+
+        .logo h3 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .navLinks nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .navLinks nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .navLinks nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        .navLinks nav ul li a.active {
+            color: var(--primary);
+        }
+
+        .navLinks nav ul li a.active::after,
+        .navLinks nav ul li a:hover::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            height: 3px;
+            width: 100%;
+            background-color: var(--primary);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 150px 5% 100px;
+            text-align: center;
+            color: var(--light);
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            font-family: 'Lora', serif;
+        }
+
+        /* Search Section */
+        .search-section {
+            padding: 40px 5%;
+            background: var(--light);
+            text-align: center;
+        }
+
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(206, 184, 19, 0.2);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        .popular-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .tag {
+            background: #f0f0f0;
+            color: #666;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .tag:hover {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        /* FAQs Section */
+        .faqs-section {
+            padding: 80px 5%;
+            background: #f8f8f8;
+        }
+
+        .faqs-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .faqs-container h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+
+        .faq-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .faq-category {
+            padding: 12px 25px;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .faq-category:hover, .faq-category.active {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        .faq-list {
+            margin-bottom: 50px;
+        }
+
+        .faq-item {
+            background: #fff;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .faq-question {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .faq-question i {
+            transition: var(--transition);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px;
+            max-height: 500px;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /* Contact CTA */
+        .contact-cta {
+            padding: 80px 5%;
+            background: var(--light);
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .cta-container h2 {
+            font-size: 2.2rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .cta-container p {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .navLinks nav ul {
+                gap: 1.5rem;
+            }
+            
+            .logo h3 {
+                font-size: 1.2rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .navLinks {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                background: rgba(26, 26, 26, 0.95);
+                width: 250px;
+                height: calc(100vh - 70px);
+                transition: var(--transition);
+                backdrop-filter: blur(10px);
+                border-left: 1px solid rgba(206, 184, 19, 0.2);
+            }
+            
+            .navLinks.active {
+                right: 0;
+            }
+            
+            .navLinks nav ul {
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+            }
+            
+            .page-header {
+                padding: 120px 5% 80px;
+            }
+            
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .cta-container {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logo h3 {
+                font-size: 1rem;
+            }
+            
+            .logo img {
+                height: 40px;
+            }
+            
+            .navBar.scrolled .logo img {
+                height: 35px;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .faq-categories {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .faq-category {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .faq-item {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: rgba(26, 26, 26, 0.95);
+            border-radius: 20px;
+            padding: 60px 40px 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(206, 184, 19, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 60px;
+        }
+
+        .footer-about p {
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 20px;
+            max-width: 300px;
+        }
+
+        .footer-heading {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a i {
+            margin-right: 10px;
+            color: var(--primary);
+            font-size: 0.8rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .footer-contact {
+            list-style: none;
+        }
+
+        .footer-contact li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .footer-contact i {
+            color: var(--primary);
+            margin-right: 15px;
+            font-size: 1.1rem;
+            margin-top: 3px;
+        }
+
+        .footer-contact span {
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        .footer-newsletter p {
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .newsletter-btn {
+            background: var(--primary);
+            color: var(--dark);
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .newsletter-btn:hover {
+            background: var(--secondary);
+            color: var(--light);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: #ccc;
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-5px);
+        }
+
+        /* Developer Section */
+        .developer-section {
+            background: rgba(206, 184, 19, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 40px;
+            border-left: 4px solid var(--primary);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .developer-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--dark);
+            font-weight: bold;
+        }
+
+        .developer-info {
+            flex: 1;
+        }
+
+        .developer-info h3 {
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .developer-info p {
+            color: #ccc;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .developer-tag {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .developer-contact {
+            display: flex;
+            gap: 15px;
+        }
+
+        .dev-contact-btn {
+            padding: 8px 20px;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dev-contact-btn:hover {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        /* Footer Bottom */
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .copyright {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-bottom-links a {
+            color: #999;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--primary);
+        }
+
+        .back-to-top {
+            background: var(--primary);
+            color: var(--dark);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(206, 184, 19, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .footer {
+                padding: 40px 20px 20px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .developer-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .developer-contact {
+                justify-content: center;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input {
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-btn {
+                border-radius: 5px;
+                padding: 12px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer-content > div {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .developer-section {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navBar">
+        <div class="logo">
+            <img src="Component/Images/ChatGPT Image Sep 16, 2025, 04_30_43 PM.png" alt="Food Basket Brewery Logo">
+            <h3>FOOD BASKET BREWERY</h3>
+        </div>
+
+        <div class="navLinks">
+            <nav>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="About-us.html">ABOUT US</a></li>
+                    <li><a href="product.html">OUR PRODUCTS</a></li>
+                    <li><a href="brewery.html">BREWERY TOUR</a></li>
+                    <li><a href="sustainability.html">SUSTAINABILITY</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                    <li><a href="faqs.html" >FAQs</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Frequently Asked Questions</h1>
+        <p>Find answers to the most common questions about Food Basket Brewery, our products, and services.</p>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search for questions...">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+            <div class="popular-tags">
+                <div class="tag">Products</div>
+                <div class="tag">Tours</div>
+                <div class="tag">Sustainability</div>
+                <div class="tag">Distribution</div>
+                <div class="tag">Ingredients</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQs Section -->
+    <section class="faqs-section">
+        <div class="faqs-container">
+            <h2>Common Questions</h2>
+            
+            <div class="faq-categories">
+                <div class="faq-category active">All Questions</div>
+                <div class="faq-category">Products</div>
+                <div class="faq-category">Brewery Tours</div>
+                <div class="faq-category">Sustainability</div>
+                <div class="faq-category">Distribution</div>
+            </div>
+            
+            <div class="faq-list">
+                <div class="faq-item active">
+                    <div class="faq-question">
+                        What makes Food Basket Brewery unique? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Food Basket Brewery is Benue's first craft brewery, specializing in beverages made with locally sourced ingredients. Our unique approach combines traditional brewing techniques with modern innovation, and our commitment to sustainability sets us apart. We work directly with local farmers to create authentic flavors that represent the best of our region.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Where can I buy your products? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Our products are available at select retailers throughout Benue State, including Makurdi Central Market, Gboko Premium Stores, and Otukpo Beverage Haven. We're also expanding to supermarkets in Abuja. You can always visit our brewery store for the full range of our products. Check our website for specific locations near you.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What are your brewery tour hours? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        We offer brewery tours Tuesday through Friday from 10am to 6pm, Saturdays from 11am to 8pm, and Sundays from 12pm to 5pm. We're closed on Mondays. Tours typically last 45-60 minutes and include a tasting session. We recommend booking in advance, especially for weekend tours and groups larger than 6 people.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Are your beverages suitable for vegetarians/vegans? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, all of our beverages are suitable for both vegetarians and vegans. We use only plant-based ingredients in our brewing process and do not use any animal-derived products or processing aids. Our commitment to natural, locally sourced ingredients means you can enjoy our products with confidence.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How do you practice sustainability? <i class="far fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Sustainability is at the core of our operations. We source over 80% of our ingredients from local farmers, reducing food miles and supporting the local economy. We've implemented water conservation systems that reduce our usage by 40%, and we recycle 100% of our wastewater. Our packaging uses recycled materials, and we're transitioning to solar energy with a goal of 100% renewable power by 2025.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do you offer non-alcoholic options? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, we offer several non-alcoholic options, including our Makurdi Malt and Sorghum Sparkle beverages. These are crafted with the same care and quality ingredients as our alcoholic beverages, providing refreshing options for designated drivers, those avoiding alcohol, or anyone looking for a delicious non-alcoholic alternative.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I host a private event at the brewery? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely! We offer private event hosting for groups of 20-100 people. Our space is perfect for corporate events, birthday celebrations, and other special occasions. We can arrange customized tours, tasting sessions, and food pairings. Please contact our events team at events@foodbasketbrewery.com for availability and pricing.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How fresh are your products? <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        We pride ourselves on freshness. Our products are brewed in small batches and delivered to retailers within days of packaging. Each bottle or can has a freshness date stamped on it. For the optimal experience, we recommend consuming our beers within 3 months of the packaging date and our malt beverages within 6 months.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <!-- Contact CTA -->
+    <section class="contact-cta">
+        <div class="cta-container">
+            <h2>Still Have Questions?</h2>
+            <p>Can't find the answer you're looking for? Our team is here to help. Reach out to us and we'll respond as soon as possible.</p>
+            <a href="#" class="cta-button">Contact Us</a>
+        </div>
+    </section>
+
+        <!-- footer -->
+
+      <div class="container">
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="Component/Images/ChatGPT Image Sep 16, 2025, 04_30_43 PM.png" alt="Food Basket Brewery Logo">
+                    </div>
+                    <p>Benue's pioneering brewery, crafting world-class beverages with locally sourced ingredients since 2018.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="/Component/ABOUT/About-us.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="./Component/PRODUCTS/product.html"><i class="fas fa-chevron-right"></i> Our Products</a></li>
+                        <li><a href="../Component/BRE.TOUR/brewery.html"><i class="fas fa-chevron-right"></i> Brewery Tour</a></li>
+                        <li><a href="../Component/SUSTAINABILITY/sustainability.html"><i class="fas fa-chevron-right"></i> Sustainability</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3 class="footer-heading">Contact Info</h3>
+                    <ul>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Gboko Road<br>Makurdi, Benue State, Nigeria</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+234 123 456 7890<br>+234 098 765 4321</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@foodbasketbrewery.com<br>orders@foodbasketbrewery.com</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h3 class="footer-heading">Newsletter</h3>
+                    <p>Subscribe to our newsletter for updates on new products, events, and exclusive offers.</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                        <button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Developer Section -->
+            <div class="developer-section">
+                <div class="developer-avatar">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="developer-info">
+                    <h3>Crafted with <i class="fas fa-heart" style="color: #e74c3c;"></i> by MavelCodeSolutions</h3>
+                    <p>Web Developer & Designer specializing in creating unique digital experiences for businesses.</p>
+                    <span class="developer-tag"><i class="fas fa-tag"></i> Full Stack Developer</span>
+                </div>
+                <div class="developer-contact">
+                    <a href="https://mavcode.netlify.app/" class="dev-contact-btn"><i class="fas fa-envelope" ></i> Portfolio</a>
+                    <a href="https://github.com/MavTech24" class="dev-contact-btn"><i class="fab fa-github"></i> Github</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2025 Food Basket Brewery. All Rights Reserved. | Designed & Developed by <b><a href="#">MavelCodeSolutions</a></b></p>
+                </div>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Sitemap</a>
+                </div>
+                <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+            </div>
+        </footer>
+    </div>
+
+
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.querySelector(".menu-toggle");
+        const navLinks = document.querySelector(".navLinks");
+        const navBar = document.querySelector(".navBar");
+
+        menuToggle.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+            menuToggle.classList.toggle("active");
+        });
+
+        // Navbar scroll effect
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) {
+                navBar.classList.add("scrolled");
+            } else {
+                navBar.classList.remove("scrolled");
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll(".navLinks nav ul li a").forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("active");
+                menuToggle.classList.remove("active");
+            });
+        });
+
+        // FAQ accordion functionality
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', () => {
+                // Close all other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.querySelector('.search-input');
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+            
+            faqQuestions.forEach(question => {
+                const questionText = question.textContent.toLowerCase();
+                const faqItem = question.parentElement;
+                
+                if (questionText.includes(searchTerm)) {
+                    faqItem.style.display = 'block';
+                } else {
+                    faqItem.style.display = 'none';
+                }
+            });
+        });
+
+        // Category filtering
+        const categoryButtons = document.querySelectorAll('.faq-category');
+        
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // For demonstration purposes - in a real implementation,
+                // this would filter the FAQs by category
+                alert('Category filtering would be implemented here. This would show FAQs for: ' + button.textContent);
+            });
+        });
+
+        // Tag clicking
+        const tags = document.querySelectorAll('.tag');
+        
+        tags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                searchInput.value = tag.textContent;
+                const event = new Event('input');
+                searchInput.dispatchEvent(event);
+            });
+        });
+
+                //footer
+
+              // Back to top button
+        const backToTopBtn = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.opacity = '1';
+                backToTopBtn.style.visibility = 'visible';
+            } else {
+                backToTopBtn.style.opacity = '0';
+                backToTopBtn.style.visibility = 'hidden';
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Newsletter form submission
+        const newsletterForm = document.querySelector('.newsletter-form');
+        
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const emailInput = newsletterForm.querySelector('input');
+            
+            if (emailInput.value) {
+                alert('Thank you for subscribing to our newsletter!');
+                emailInput.value = '';
+            }
+        });
+
+        // Animation on scroll
+        const footerSections = document.querySelectorAll('.footer-content > div');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 0.8s ease-out forwards';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        footerSections.forEach(section => {
+            section.style.opacity = '0';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

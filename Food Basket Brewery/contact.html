@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Food Basket Brewery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ceb813;
+            --secondary: #2c5f2d;
+            --dark: #1a1a1a;
+            --light: #f8f8f8;
+            --accent: #8b4513;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navBar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: rgba(26, 26, 26, 0.9);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(206, 184, 19, 0.2);
+            transition: var(--transition);
+        }
+
+        .navBar.scrolled {
+            padding: 0.7rem 5%;
+            background: rgba(26, 26, 26, 0.95);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            height: 50px;
+            transition: var(--transition);
+        }
+
+        .navBar.scrolled .logo img {
+            height: 40px;
+        }
+
+        .logo h3 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .navLinks nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .navLinks nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .navLinks nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        .navLinks nav ul li a.active {
+            color: var(--primary);
+        }
+
+        .navLinks nav ul li a.active::after,
+        .navLinks nav ul li a:hover::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            height: 3px;
+            width: 100%;
+            background-color: var(--primary);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 150px 5% 100px;
+            text-align: center;
+            color: var(--light);
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            font-family: 'Lora', serif;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 5%;
+            background: var(--light);
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .contact-info h2 {
+            font-size: 2.2rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .contact-info p {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--secondary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .info-content h3 {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .info-content p {
+            color: #666;
+            margin-bottom: 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--secondary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-title {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #f9f9f9;
+            color: var(--dark);
+            font-family: 'Montserrat', sans-serif;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(206, 184, 19, 0.2);
+            background: #fff;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: var(--dark);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .submit-btn i {
+            margin-left: 8px;
+            transition: var(--transition);
+        }
+
+        .submit-btn:hover {
+            background: var(--secondary);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .submit-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 0 5% 80px;
+        }
+
+        .map-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            height: 450px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* FAQ CTA */
+        .faq-cta {
+            padding: 80px 5%;
+            background: #f8f8f8;
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-container h2 {
+            font-size: 2.2rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .cta-container p {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .navLinks nav ul {
+                gap: 1.5rem;
+            }
+            
+            .logo h3 {
+                font-size: 1.2rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .navLinks {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                background: rgba(26, 26, 26, 0.95);
+                width: 250px;
+                height: calc(100vh - 70px);
+                transition: var(--transition);
+                backdrop-filter: blur(10px);
+                border-left: 1px solid rgba(206, 184, 19, 0.2);
+            }
+            
+            .navLinks.active {
+                right: 0;
+            }
+            
+            .navLinks nav ul {
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+            }
+            
+            .page-header {
+                padding: 120px 5% 80px;
+            }
+            
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+            
+            .contact-form {
+                padding: 30px;
+            }
+            
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logo h3 {
+                font-size: 1rem;
+            }
+            
+            .logo img {
+                height: 40px;
+            }
+            
+            .navBar.scrolled .logo img {
+                height: 35px;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .contact-info h2 {
+                font-size: 1.8rem;
+            }
+            
+            .info-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .info-icon {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .map-container {
+                height: 300px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .contact-info, .contact-form {
+            animation: fadeIn 1s ease-out;
+        }
+
+                        /* footer */
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: rgba(26, 26, 26, 0.95);
+            border-radius: 20px;
+            padding: 60px 40px 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(206, 184, 19, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 60px;
+        }
+
+        .footer-about p {
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 20px;
+            max-width: 300px;
+        }
+
+        .footer-heading {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a i {
+            margin-right: 10px;
+            color: var(--primary);
+            font-size: 0.8rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .footer-contact {
+            list-style: none;
+        }
+
+        .footer-contact li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .footer-contact i {
+            color: var(--primary);
+            margin-right: 15px;
+            font-size: 1.1rem;
+            margin-top: 3px;
+        }
+
+        .footer-contact span {
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        .footer-newsletter p {
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .newsletter-btn {
+            background: var(--primary);
+            color: var(--dark);
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .newsletter-btn:hover {
+            background: var(--secondary);
+            color: var(--light);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: #ccc;
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-5px);
+        }
+
+        /* Developer Section */
+        .developer-section {
+            background: rgba(206, 184, 19, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 40px;
+            border-left: 4px solid var(--primary);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .developer-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--dark);
+            font-weight: bold;
+        }
+
+        .developer-info {
+            flex: 1;
+        }
+
+        .developer-info h3 {
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .developer-info p {
+            color: #ccc;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .developer-tag {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .developer-contact {
+            display: flex;
+            gap: 15px;
+        }
+
+        .dev-contact-btn {
+            padding: 8px 20px;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dev-contact-btn:hover {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        /* Footer Bottom */
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .copyright {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-bottom-links a {
+            color: #999;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--primary);
+        }
+
+        .back-to-top {
+            background: var(--primary);
+            color: var(--dark);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(206, 184, 19, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .footer {
+                padding: 40px 20px 20px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .developer-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .developer-contact {
+                justify-content: center;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input {
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-btn {
+                border-radius: 5px;
+                padding: 12px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer-content > div {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .developer-section {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="navBar">
+        <div class="logo">
+            <img src="Component/Images/ChatGPT Image Sep 16, 2025, 04_30_43 PM.png" alt="Food Basket Brewery Logo">
+            <h3>FOOD BASKET BREWERY</h3>
+        </div>
+
+        <div class="navLinks">
+            <nav>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="About-us.html">ABOUT US</a></li>
+                    <li><a href="product.html">OUR PRODUCTS</a></li>
+                    <li><a href="brewery.html">BREWERY TOUR</a></li>
+                    <li><a href="sustainability.html">SUSTAINABILITY</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Get In Touch</h1>
+        <p>We'd love to hear from you. Reach out to us with questions, feedback, or to schedule a visit to our brewery.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <div class="contact-info">
+                <h2>Contact Information</h2>
+                <p>Have questions about our products, brewery tours, or anything else? We're here to help and would love to hear from you.</p>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Our Location</h3>
+                        <p>123 Gboko Road, Industrial Area<br>Makurdi, Benue State, Nigeria</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Phone Number</h3>
+                        <p>+234 123 456 7890<br>+234 098 765 4321</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Email Address</h3>
+                        <p>info@foodbasketbrewery.com<br>orders@foodbasketbrewery.com</p>
+                    </div>
+                </div>
+                
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="info-content">
+                        <h3>Opening Hours</h3>
+                        <p>Monday: Closed<br>
+                           Tuesday-Friday: 10am - 6pm<br>
+                           Saturday: 11am - 8pm<br>
+                           Sunday: 12pm - 5pm</p>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h2 class="form-title">Send Us a Message</h2>
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="products">Product Information</option>
+                                <option value="tour">Brewery Tour Booking</option>
+                                <option value="distribution">Distribution Inquiry</option>
+                                <option value="partnership">Partnership Opportunity</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Send Message <i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+        <div class="map-container">
+            <iframe src="https://maps.app.goo.gl/z1h4vHvGdtR249kT8" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <!-- FAQ CTA -->
+    <section class="faq-cta">
+        <div class="cta-container">
+            <h2>Have Questions?</h2>
+            <p>Check out our Frequently Asked Questions page for quick answers to common inquiries about our products, tours, and more.</p>
+            <a href="../Component/FAQs/faqs.html" class="cta-button">Visit FAQs</a>
+        </div>
+    </section>
+
+            <!-- footer -->
+
+      <div class="container">
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="Component/Images/ChatGPT Image Sep 16, 2025, 04_30_43 PM.png" alt="Food Basket Brewery Logo">
+                    </div>
+                    <p>Benue's pioneering brewery, crafting world-class beverages with locally sourced ingredients since 2018.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="/Component/ABOUT/About-us.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="./Component/PRODUCTS/product.html"><i class="fas fa-chevron-right"></i> Our Products</a></li>
+                        <li><a href="../Component/BRE.TOUR/brewery.html"><i class="fas fa-chevron-right"></i> Brewery Tour</a></li>
+                        <li><a href="../Component/SUSTAINABILITY/sustainability.html"><i class="fas fa-chevron-right"></i> Sustainability</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3 class="footer-heading">Contact Info</h3>
+                    <ul>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Gboko Road<br>Makurdi, Benue State, Nigeria</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+234 123 456 7890<br>+234 098 765 4321</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@foodbasketbrewery.com<br>orders@foodbasketbrewery.com</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h3 class="footer-heading">Newsletter</h3>
+                    <p>Subscribe to our newsletter for updates on new products, events, and exclusive offers.</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                        <button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Developer Section -->
+            <div class="developer-section">
+                <div class="developer-avatar">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="developer-info">
+                    <h3>Crafted with <i class="fas fa-heart" style="color: #e74c3c;"></i> by MavelCodeSolutions</h3>
+                    <p>Web Developer & Designer specializing in creating unique digital experiences for businesses.</p>
+                    <span class="developer-tag"><i class="fas fa-tag"></i> Full Stack Developer</span>
+                </div>
+                <div class="developer-contact">
+                    <a href="https://mavcode.netlify.app/" class="dev-contact-btn"><i class="fas fa-envelope" ></i> Portfolio</a>
+                    <a href="https://github.com/MavTech24" class="dev-contact-btn"><i class="fab fa-github"></i> Github</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2025 Food Basket Brewery. All Rights Reserved. | Designed & Developed by <b><a href="#">MavelCodeSolutions</a></b></p>
+                </div>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Sitemap</a>
+                </div>
+                <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+            </div>
+        </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.querySelector(".menu-toggle");
+        const navLinks = document.querySelector(".navLinks");
+        const navBar = document.querySelector(".navBar");
+
+        menuToggle.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+            menuToggle.classList.toggle("active");
+        });
+
+        // Navbar scroll effect
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) {
+                navBar.classList.add("scrolled");
+            } else {
+                navBar.classList.remove("scrolled");
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll(".navLinks nav ul li a").forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("active");
+                menuToggle.classList.remove("active");
+            });
+        });
+
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simple form validation
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            if (!name || !email || !subject || !message) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // In a real implementation, you would send the form data to a server here
+            // For this example, we'll just show a success message
+            alert('Thank you for your message! We will get back to you soon.');
+            contactForm.reset();
+        });
+
+        // Subject selection change
+        const subjectSelect = document.getElementById('subject');
+        
+        subjectSelect.addEventListener('change', function() {
+            if (this.value === 'tour') {
+                // You could customize the form based on selection
+                // For example, show additional fields for tour booking
+            }
+        });
+
+                        //footer
+
+              // Back to top button
+        const backToTopBtn = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.opacity = '1';
+                backToTopBtn.style.visibility = 'visible';
+            } else {
+                backToTopBtn.style.opacity = '0';
+                backToTopBtn.style.visibility = 'hidden';
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Newsletter form submission
+        const newsletterForm = document.querySelector('.newsletter-form');
+        
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const emailInput = newsletterForm.querySelector('input');
+            
+            if (emailInput.value) {
+                alert('Thank you for subscribing to our newsletter!');
+                emailInput.value = '';
+            }
+        });
+
+        // Animation on scroll
+        const footerSections = document.querySelectorAll('.footer-content > div');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 0.8s ease-out forwards';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        footerSections.forEach(section => {
+            section.style.opacity = '0';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

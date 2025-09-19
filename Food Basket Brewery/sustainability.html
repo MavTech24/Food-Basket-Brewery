@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainability - Food Basket Brewery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lora:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ceb813;
+            --secondary: #2c5f2d;
+            --dark: #1a1a1a;
+            --light: #f8f8f8;
+            --accent: #8b4513;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navBar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            background: rgba(26, 26, 26, 0.9);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(206, 184, 19, 0.2);
+            transition: var(--transition);
+        }
+
+        .navBar.scrolled {
+            padding: 0.7rem 5%;
+            background: rgba(26, 26, 26, 0.95);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo img {
+            height: 50px;
+            transition: var(--transition);
+        }
+
+        .navBar.scrolled .logo img {
+            height: 40px;
+        }
+
+        .logo h3 {
+            color: var(--primary);
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .navLinks nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .navLinks nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .navLinks nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        .navLinks nav ul li a.active {
+            color: var(--primary);
+        }
+
+        .navLinks nav ul li a.active::after,
+        .navLinks nav ul li a:hover::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            height: 3px;
+            width: 100%;
+            background-color: var(--primary);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1493246507139-91e8fad9978e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 150px 5% 100px;
+            text-align: center;
+            color: var(--light);
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            font-family: 'Lora', serif;
+        }
+
+        /* Sustainability Intro */
+        .sustainability-intro {
+            padding: 80px 5%;
+            background: var(--light);
+        }
+
+        .intro-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .intro-content {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .intro-content h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .intro-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #444;
+        }
+
+        .intro-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .intro-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Sustainability Pillars */
+        .sustainability-pillars {
+            padding: 80px 5%;
+            background: #f8f8f8;
+        }
+
+        .pillars-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pillars-container h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .pillar-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .pillar-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .pillar-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--secondary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .pillar-card h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .pillar-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Initiatives Section */
+        .initiatives-section {
+            padding: 80px 5%;
+            background: var(--light);
+        }
+
+        .initiatives-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .initiatives-container h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+
+        .initiatives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .initiative-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .initiative-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .initiative-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .initiative-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .initiative-card:hover .initiative-image img {
+            transform: scale(1.05);
+        }
+
+        .initiative-content {
+            padding: 25px;
+        }
+
+        .initiative-content h3 {
+            font-size: 1.4rem;
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .initiative-content p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .initiative-stats {
+            display: flex;
+            justify-content: space-around;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* Impact Section */
+        .impact-section {
+            padding: 80px 5%;
+            background: linear-gradient(to right, var(--secondary) 0%, #3a7a3c 100%);
+            color: #fff;
+        }
+
+        .impact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .impact-container h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            font-weight: 700;
+        }
+
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .impact-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .impact-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .impact-label {
+            font-size: 1.1rem;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            padding: 80px 5%;
+            background: var(--light);
+            text-align: center;
+        }
+
+        .cta-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .cta-container h2 {
+            font-size: 2.2rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .cta-container p {
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+            border: 2px solid var(--primary);
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .navLinks nav ul {
+                gap: 1.5rem;
+            }
+            
+            .logo h3 {
+                font-size: 1.2rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .navLinks {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                background: rgba(26, 26, 26, 0.95);
+                width: 250px;
+                height: calc(100vh - 70px);
+                transition: var(--transition);
+                backdrop-filter: blur(10px);
+                border-left: 1px solid rgba(206, 184, 19, 0.2);
+            }
+            
+            .navLinks.active {
+                right: 0;
+            }
+            
+            .navLinks nav ul {
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+            }
+            
+            .page-header {
+                padding: 120px 5% 80px;
+            }
+            
+            .page-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .intro-container {
+                flex-direction: column;
+            }
+            
+            .initiatives-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .impact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .cta-container {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .logo h3 {
+                font-size: 1rem;
+            }
+            
+            .logo img {
+                height: 40px;
+            }
+            
+            .navBar.scrolled .logo img {
+                height: 35px;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .intro-content h2 {
+                font-size: 2rem;
+            }
+            
+            .pillars-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .impact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .pillar-card, .initiative-card {
+            animation: fadeIn 1s ease-out;
+        }
+
+                /* footer */
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: rgba(26, 26, 26, 0.95);
+            border-radius: 20px;
+            padding: 60px 40px 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(206, 184, 19, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-logo img {
+            height: 60px;
+        }
+
+        .footer-about p {
+            line-height: 1.6;
+            color: #ccc;
+            margin-bottom: 20px;
+            max-width: 300px;
+        }
+
+        .footer-heading {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-heading::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-links a i {
+            margin-right: 10px;
+            color: var(--primary);
+            font-size: 0.8rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .footer-contact {
+            list-style: none;
+        }
+
+        .footer-contact li {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .footer-contact i {
+            color: var(--primary);
+            margin-right: 15px;
+            font-size: 1.1rem;
+            margin-top: 3px;
+        }
+
+        .footer-contact span {
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        .footer-newsletter p {
+            color: #ccc;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--light);
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .newsletter-btn {
+            background: var(--primary);
+            color: var(--dark);
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .newsletter-btn:hover {
+            background: var(--secondary);
+            color: var(--light);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: #ccc;
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            color: var(--dark);
+            transform: translateY(-5px);
+        }
+
+        /* Developer Section */
+        .developer-section {
+            background: rgba(206, 184, 19, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 40px;
+            border-left: 4px solid var(--primary);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .developer-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--dark);
+            font-weight: bold;
+        }
+
+        .developer-info {
+            flex: 1;
+        }
+
+        .developer-info h3 {
+            color: var(--primary);
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .developer-info p {
+            color: #ccc;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .developer-tag {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--dark);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .developer-contact {
+            display: flex;
+            gap: 15px;
+        }
+
+        .dev-contact-btn {
+            padding: 8px 20px;
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dev-contact-btn:hover {
+            background: var(--primary);
+            color: var(--dark);
+        }
+
+        /* Footer Bottom */
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 25px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .copyright {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer-bottom-links a {
+            color: #999;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--primary);
+        }
+
+        .back-to-top {
+            background: var(--primary);
+            color: var(--dark);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(206, 184, 19, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .footer {
+                padding: 40px 20px 20px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .developer-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .developer-contact {
+                justify-content: center;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input {
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-btn {
+                border-radius: 5px;
+                padding: 12px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .footer-content > div {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .developer-section {
+            animation: fadeIn 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="navBar">
+        <div class="logo">
+            <img src="Component/images/ChatGPT Image Sep 16, 2025, 04_30_43 PM.png" alt="Food Basket Brewery Logo">
+            <h3>FOOD BASKET BREWERY</h3>
+        </div>
+
+        <div class="navLinks">
+            <nav>
+                <ul>
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="About-us.html">ABOUT US</a></li>
+                    <li><a href="product.html">OUR PRODUCTS</a></li>
+                    <li><a href="brewery.html">BREWERY TOUR</a></li>
+                    <li><a href="sustainability.html">SUSTAINABILITY</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                    <li><a href="faqs.html">FAQs</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Sustainability & Community</h1>
+        <p>At Food Basket Brewery, we believe that great beer comes with great responsibility. Our commitment to sustainability and community is at the heart of everything we do.</p>
+    </section>
+
+    <!-- Sustainability Intro -->
+    <section class="sustainability-intro">
+        <div class="intro-container">
+            <div class="intro-content">
+                <h2>Our Sustainable Journey</h2>
+                <p>Since our founding in 2024, Food Basket Brewery has been committed to brewing exceptional beverages while minimizing our environmental impact and maximizing our positive contribution to the Benue community.</p>
+                <p>We believe that sustainability is not just a practice but a philosophy that guides our operations, from sourcing ingredients to packaging and distribution.</p>
+                <p>Our approach is built on three core pillars: Environmental Stewardship, Community Engagement, and Economic Responsibility.</p>
+            </div>
+            <div class="intro-image">
+                <img src="https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1752&q=80" alt="Sustainable Farming">
+            </div>
+        </div>
+    </section>
+
+    <!-- Sustainability Pillars -->
+    <section class="sustainability-pillars">
+        <div class="pillars-container">
+            <h2>Our Sustainability Pillars</h2>
+            <div class="pillars-grid">
+                <div class="pillar-card">
+                    <div class="pillar-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Environmental Stewardship</h3>
+                    <p>We minimize our environmental footprint through water conservation, waste reduction, energy efficiency, and sustainable sourcing practices.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Community Engagement</h3>
+                    <p>We support local farmers, create employment opportunities, and contribute to community development initiatives in Benue State.</p>
+                </div>
+                <div class="pillar-card">
+                    <div class="pillar-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Economic Responsibility</h3>
+                    <p>We foster local economic growth by prioritizing local suppliers and creating sustainable business practices that benefit our community.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Initiatives Section -->
+    <section class="initiatives-section">
+        <div class="initiatives-container">
+            <h2>Our Sustainability Initiatives</h2>
+            <div class="initiatives-grid">
+                <div class="initiative-card">
+                    <div class="initiative-image">
+                        <img src="https://images.unsplash.com/photo-1620654458539-b4c186f32a32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Local Sourcing">
+                    </div>
+                    <div class="initiative-content">
+                        <h3>Local Ingredient Sourcing</h3>
+                        <p>We partner with local farmers in Benue State to source over 80% of our ingredients, reducing food miles and supporting the local agricultural economy.</p>
+                        <div class="initiative-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">80%</div>
+                                <div class="stat-label">Local Ingredients</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">50+</div>
+                                <div class="stat-label">Farmers Supported</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="initiative-card">
+                    <div class="initiative-image">
+                        <img src="https://images.unsplash.com/photo-1581881067989-7e3eaf45f4f6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1771&q=80" alt="Water Conservation">
+                    </div>
+                    <div class="initiative-content">
+                        <h3>Water Conservation</h3>
+                        <p>We've implemented water-saving technologies that reduce our water usage by 40% compared to industry standards, and we treat and recycle wastewater.</p>
+                        <div class="initiative-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">40%</div>
+                                <div class="stat-label">Water Saved</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">100%</div>
+                                <div class="stat-label">Water Recycled</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="initiative-card">
+                    <div class="initiative-image">
+                        <img src="https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80" alt="Renewable Energy">
+                    </div>
+                    <div class="initiative-content">
+                        <h3>Renewable Energy</h3>
+                        <p>We've installed solar panels that provide 30% of our energy needs and are committed to transitioning to 100% renewable energy by 2025.</p>
+                        <div class="initiative-stats">
+                            <div class="stat-item">
+                                <div class="stat-value">30%</div>
+                                <div class="stat-label">Solar Energy</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-value">2025</div>
+                                <div class="stat-label">100% Renewable Goal</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Section -->
+    <section class="impact-section">
+        <div class="impact-container">
+            <h2>Our Impact</h2>
+            <div class="impact-grid">
+                <div class="impact-item">
+                    <div class="impact-value">50+</div>
+                    <div class="impact-label">Local Farmers Supported</div>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-value">75%</div>
+                    <div class="impact-label">Waste Diverted from Landfill</div>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-value">120+</div>
+                    <div class="impact-label">Jobs Created</div>
+                </div>
+                <div class="impact-item">
+                    <div class="impact-value">10,000+</div>
+                    <div class="impact-label">Trees Planted</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="cta-container">
+            <h2>Join Us in Our Sustainability Journey</h2>
+            <p>We believe that sustainability is a collective effort. Whether you're a customer, partner, or community member, there are many ways to support our mission and make a positive impact together.</p>
+            <a href="#" class="cta-button">Get Involved</a>
+        </div>
+    </section>
+
+        <!-- footer -->
+
+      <div class="container">
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <img src="Component/Images/ChatGPT Image Sep 16, 2025, 04_30_43 PM.png" alt="Food Basket Brewery Logo">
+                    </div>
+                    <p>Benue's pioneering brewery, crafting world-class beverages with locally sourced ingredients since 2018.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3 class="footer-heading">Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="/Component/ABOUT/About-us.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="./Component/PRODUCTS/product.html"><i class="fas fa-chevron-right"></i> Our Products</a></li>
+                        <li><a href="../Component/BRE.TOUR/brewery.html"><i class="fas fa-chevron-right"></i> Brewery Tour</a></li>
+                        <li><a href="../Component/SUSTAINABILITY/sustainability.html"><i class="fas fa-chevron-right"></i> Sustainability</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3 class="footer-heading">Contact Info</h3>
+                    <ul>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Gboko Road<br>Makurdi, Benue State, Nigeria</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <span>+234 123 456 7890<br>+234 098 765 4321</span>
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <span>info@foodbasketbrewery.com<br>orders@foodbasketbrewery.com</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h3 class="footer-heading">Newsletter</h3>
+                    <p>Subscribe to our newsletter for updates on new products, events, and exclusive offers.</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Your email address" required>
+                        <button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                    <div class="footer-social">
+                        <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Developer Section -->
+            <div class="developer-section">
+                <div class="developer-avatar">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="developer-info">
+                    <h3>Crafted with <i class="fas fa-heart" style="color: #e74c3c;"></i> by MavelCodeSolutions</h3>
+                    <p>Web Developer & Designer specializing in creating unique digital experiences for businesses.</p>
+                    <span class="developer-tag"><i class="fas fa-tag"></i> Full Stack Developer</span>
+                </div>
+                <div class="developer-contact">
+                    <a href="https://mavcode.netlify.app/" class="dev-contact-btn"><i class="fas fa-envelope" ></i> Portfolio</a>
+                    <a href="https://github.com/MavTech24" class="dev-contact-btn"><i class="fab fa-github"></i> Github</a>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <p>&copy; 2025 Food Basket Brewery. All Rights Reserved. | Designed & Developed by <b><a href="#">MavelCodeSolutions</a></b></p>
+                </div>
+                <div class="footer-bottom-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Sitemap</a>
+                </div>
+                <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+            </div>
+        </footer>
+
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.querySelector(".menu-toggle");
+        const navLinks = document.querySelector(".navLinks");
+        const navBar = document.querySelector(".navBar");
+
+        menuToggle.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+            menuToggle.classList.toggle("active");
+        });
+
+        // Navbar scroll effect
+        window.addEventListener("scroll", () => {
+            if (window.scrollY > 50) {
+                navBar.classList.add("scrolled");
+            } else {
+                navBar.classList.remove("scrolled");
+            }
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll(".navLinks nav ul li a").forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("active");
+                menuToggle.classList.remove("active");
+            });
+        });
+
+        // Animate stats on scroll
+        function animateValue(element, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                element.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Initialize animations when elements come into view
+        const observers = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statValue = entry.target.querySelector('.stat-value');
+                    const value = parseInt(statValue.textContent);
+                    if (!isNaN(value)) {
+                        animateValue(statValue, 0, value, 2000);
+                    }
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.initiative-card').forEach(card => {
+            observer.observe(card);
+        });
+
+                //footer
+
+              // Back to top button
+        const backToTopBtn = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.style.opacity = '1';
+                backToTopBtn.style.visibility = 'visible';
+            } else {
+                backToTopBtn.style.opacity = '0';
+                backToTopBtn.style.visibility = 'hidden';
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Newsletter form submission
+        const newsletterForm = document.querySelector('.newsletter-form');
+        
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const emailInput = newsletterForm.querySelector('input');
+            
+            if (emailInput.value) {
+                alert('Thank you for subscribing to our newsletter!');
+                emailInput.value = '';
+            }
+        });
+
+        // Animation on scroll
+        const footerSections = document.querySelectorAll('.footer-content > div');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 0.8s ease-out forwards';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        footerSections.forEach(section => {
+            section.style.opacity = '0';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
